@@ -7,7 +7,7 @@ import axios from "axios"
 import { serverUrl } from '../App';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../Firebase';
-import {} from 'react-spinners'
+import { } from 'react-spinners'
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../Redux/userSlice';
 
@@ -29,7 +29,7 @@ const SingUp = () => {
     const dispatch = useDispatch()
 
     const handleSignUp = async () => {
-        setLoding(true)
+        setLoding(true);
         try {
             const result = await axios.post(
                 `${serverUrl}/api/auth/singup`,
@@ -41,15 +41,27 @@ const SingUp = () => {
                     role
                 },
                 { withCredentials: true }
-            )
-            dispatch(setUserData(result.deta))
-            console.log(result.data)
-            setErr("")
-            setLoding(false)
+            );
+
+
+            localStorage.setItem("token", result.data.token);
+
+
+            dispatch(setUserData(result.data.user));
+
+
+            navigate("/");
+
+            console.log("Signup Success:", result.data);
+            setErr("");
         } catch (error) {
-            setErr(error.response.deta)
+            console.error("Signup error:", error);
+            setErr(error.response?.data?.message || "Signup failed");
+        } finally {
+            setLoding(false);
         }
-    }
+    };
+
 
     //...............................................................................................................................
     //...............................................................................................................................

@@ -31,7 +31,7 @@ function Nav() {
 
 
             {showSearch && (
-                <div className='w-[80%] bg-white shadow-xl rounded-lg items-center gap-[20px] h-[70px] flex fixed top-[70px] left-[5%] z-[9999]'>
+                <div className='w-[80%] bg-white shadow-xl rounded-lg items-center gap-[20px] h-[70px] flex fixed top-[70px] left-[5%] z-[9999] md:hidden'>
                     <div className="flex items-center w-full border-gray-400 px-[10px] gap-[10px]">
                         <div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
                             <FaLocationDot className="w-[20px] h-[25px] text-amber-700" />
@@ -94,7 +94,7 @@ function Nav() {
                 <button className='hidden md:block px-3 py-1 rounded-lg bg-amber-950/10 text-amber-700 text-sm font-medium cursor-pointer'>
                     My Orders
                 </button>
-
+                
 
                 <div
                     className='bg-amber-700 text-amber-50 w-[40px] h-[40px] rounded-full flex items-center justify-center
