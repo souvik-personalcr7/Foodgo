@@ -33,7 +33,7 @@ export const singUp = async (req, res) => {
             maxAge: 365 * 24 * 60 * 60 * 1000,
             httpOnly: true
         })
-        return res.status(201).json(user)
+        return res.status(201).json({ user, token })
     }
 
     catch (error) {
@@ -83,6 +83,8 @@ export const singIn = async (req, res) => {
             maxAge: 365 * 24 * 60 * 60 * 1000,
             httpOnly: true
         })
+
+        delete user.password;
         return res.status(200).json(user)
     }
 
@@ -101,8 +103,8 @@ export const singIn = async (req, res) => {
 // }
 
 export const singOut = (req, res) => {
-  res.clearCookie("token");
-  return res.status(200).json({ message: "Logged out successfully" });
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logged out successfully" });
 };
 
 
