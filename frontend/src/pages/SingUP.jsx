@@ -48,15 +48,22 @@ const SingUp = () => {
 
 
             dispatch(setUserData(result.data.user));
+            if (role === "owner") {
+                navigate("/Ownerdashboard");
+            } else if (role === "user") {
+                navigate("/");
+            } else if (role === "delivery boy") {
+                navigate("/Deliverydashboard");
+            }
 
 
             navigate("/");
 
-            console.log("Signup Success:", result.data);
+            console.log("Singup Success:", result.data);
             setErr("");
         } catch (error) {
             console.error("Signup error:", error);
-            setErr(error.response?.data?.message || "Signup failed");
+            setErr(error.response?.data?.message || "Singup failed");
         } finally {
             setLoding(false);
         }
