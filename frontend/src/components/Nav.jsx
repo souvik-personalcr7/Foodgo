@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-import { useSelector,useDispatch } from "react-redux";
+import { FaPlus } from "react-icons/fa6";
+import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { serverUrl } from '../App';
 import { setUserData } from '../Redux/userSlice';
@@ -16,10 +17,10 @@ function Nav() {
     const dispatch = useDispatch()
     const handleLogOut = async () => {
         try {
-            const result = await axios.get(`${serverUrl}/api/auth/singout`,{ withCredentials: true })
-            
+            const result = await axios.get(`${serverUrl}/api/auth/singout`, { withCredentials: true })
+
             dispatch(setUserData(null))
-            
+
         } catch (error) {
             console.log(error)
 
@@ -30,7 +31,7 @@ function Nav() {
         <div className='flex items-center justify-between bg-white shadow-md px-6 py-4'>
 
 
-            {showSearch && (
+            {showSearch && userData.role == "user" && (
                 <div className='w-[80%] bg-white shadow-xl rounded-lg items-center gap-[20px] h-[70px] flex fixed top-[70px] left-[5%] z-[9999] md:hidden'>
                     <div className="flex items-center w-full border-gray-400 px-[10px] gap-[10px]">
                         <div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
@@ -56,13 +57,16 @@ function Nav() {
 
             <h1 className='text-3xl font-bold mb-2 text-amber-700'>FoodGo</h1>
 
+            {userData.role == "user" &&
+                (<div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
+                    <FaLocationDot className="w-[20px] h-[25px] text-amber-700" />
+                    <span className="truncate text-gray-600">{city}</span>
+                </div>)}
+
 
             <div className='md:w-[60%] lg:w-[40%] bg-white shadow-xl rounded-lg items-center gap-[20px] h-[70px] hidden md:flex'>
                 <div className="flex items-center w-full border-gray-400 px-[10px] gap-[10px]">
-                    <div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
-                        <FaLocationDot className="w-[20px] h-[25px] text-amber-700" />
-                        <span className="truncate text-gray-600">{city}</span>
-                    </div>
+
                     <div className="flex items-center w-[70%] gap-[10px]">
                         <FaSearch size={25} className="text-amber-700 cursor-pointer" />
                         <input
@@ -82,7 +86,19 @@ function Nav() {
                     className="text-amber-700 md:hidden cursor-pointer"
                     onClick={() => setShowSearch(true)}
                 />}
+                {userData.role == "owner" && <>
+                    <button className='hidden md:flex items-center gap-1 p-2.5 cursor-pointer rounded-full
+                     bg-amber-700 text-amber-100 '>
+                        <FaPlus size={20} />
+                        <span>Add Food item</span>
+                    </button>
+                    <button className='md:hidden flex  items-center gap-1 p-2.5 cursor-pointer rounded-full
+                     bg-amber-700 text-amber-100   '>
+                        <FaPlus size={20} />
+                        <span>Add Food item</span>
+                    </button>
 
+                </>}
 
 
                 <div className='relative cursor-pointer mr-[5px] mb-[5px]'>
@@ -94,7 +110,7 @@ function Nav() {
                 <button className='hidden md:block px-3 py-1 rounded-lg bg-amber-950/10 text-amber-700 text-sm font-medium cursor-pointer'>
                     My Orders
                 </button>
-                
+
 
                 <div
                     className='bg-amber-700 text-amber-50 w-[40px] h-[40px] rounded-full flex items-center justify-center

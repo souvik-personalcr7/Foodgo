@@ -23,6 +23,7 @@ function App() {
         <Route path='/singin' element={!userData ? <SingIn /> : <Navigate to={"/"} />} />
         <Route path='/forgotpassword' element={!userData ? <ForgotPassword /> : <Navigate to={"/"} />} />
         <Route path='/' element={userData ? <Home /> : <Navigate to={"/singin"} />} />
+
       </Routes>
     </>
   )

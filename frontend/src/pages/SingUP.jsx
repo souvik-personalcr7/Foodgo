@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -56,8 +55,6 @@ const SingUp = () => {
                 navigate("/Deliverydashboard");
             }
 
-
-            navigate("/");
 
             console.log("Singup Success:", result.data);
             setErr("");
