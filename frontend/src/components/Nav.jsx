@@ -4,6 +4,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa6";
+import { IoReceipt } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import axios from 'axios';
 import { serverUrl } from '../App';
@@ -12,6 +13,7 @@ import { setUserData } from '../Redux/userSlice';
 
 function Nav() {
     const { userData, city } = useSelector(state => state.user);
+    const { myShopData } = useSelector(state => state.owner);
     const [showInfo, setShowInfo] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const dispatch = useDispatch()
@@ -86,19 +88,47 @@ function Nav() {
                     className="text-amber-700 md:hidden cursor-pointer"
                     onClick={() => setShowSearch(true)}
                 />}
-                {userData.role == "owner" && <>
-                    <button className='hidden md:flex items-center gap-1 p-2.5 cursor-pointer rounded-full
-                     bg-amber-700 text-amber-100 '>
-                        <FaPlus size={20} />
-                        <span>Add Food item</span>
-                    </button>
-                    <button className='md:hidden flex  items-center gap-1 p-2.5 cursor-pointer rounded-full
-                     bg-amber-700 text-amber-100   '>
-                        <FaPlus size={20} />
-                        <span>Add Food item</span>
-                    </button>
 
-                </>}
+                {userData.role === "owner" &&
+                    <>
+                        {myShopData &&
+                            
+                            <>
+
+                                <button
+                                    className="hidden md:flex items-center gap-1 p-2.5 cursor-pointer rounded-full
+                           bg-amber-700 text-amber-100"
+                                >
+                                    <FaPlus size={20} />
+                                    <span>Add Food item</span>
+                                </button>
+
+
+                                <button
+                                    className="md:hidden flex items-center justify-center p-2.5 cursor-pointer rounded-full
+                           bg-amber-700 text-amber-100"
+                                >
+                                    <FaPlus size={20} />
+                                </button>
+
+
+
+                                <div className="flex items-center gap-2 cursor-pointer relative px-3 py-2 rounded-full bg-amber-700 text-amber-50 font-medium">
+
+                                    <IoReceipt size={20} />
+
+                                    <span className="hidden md:inline">My Order</span>
+
+
+                                    <span className="absolute -right-2 -top-2 text-xs font-bold text-amber-50 bg-amber-700 rounded-full px-[6px] py-[2px]">
+                                        0
+                                    </span>
+                                </div>
+                            </>}
+
+                    </>
+                }
+
 
 
                 <div className='relative cursor-pointer mr-[5px] mb-[5px]'>
