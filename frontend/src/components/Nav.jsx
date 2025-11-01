@@ -12,7 +12,7 @@ import { setUserData } from '../Redux/userSlice';
 
 
 function Nav() {
-    const { userData, city } = useSelector(state => state.user);
+    const { userData, currentCity } = useSelector(state => state.user);
     const { myShopData } = useSelector(state => state.owner);
     const [showInfo, setShowInfo] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
@@ -38,7 +38,7 @@ function Nav() {
                     <div className="flex items-center w-full border-gray-400 px-[10px] gap-[10px]">
                         <div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
                             <FaLocationDot className="w-[20px] h-[25px] text-amber-700" />
-                            <span className="truncate text-gray-600">Kolkata</span>
+                            <span className="truncate text-gray-600">{currentCity}</span>
                         </div>
                         <div className="flex items-center w-[70%] gap-[10px]">
                             <FaSearch
@@ -62,7 +62,7 @@ function Nav() {
             {userData.role == "user" &&
                 (<div className="flex items-center w-[30%] gap-[10px] overflow-hidden ">
                     <FaLocationDot className="w-[20px] h-[25px] text-amber-700" />
-                    <span className="truncate text-gray-600">{city}</span>
+                    <span className="truncate text-gray-600">{currentCity}</span>
                 </div>)}
 
 
