@@ -10,7 +10,7 @@ const shopRouter = express.Router()
 // authrouter.post ("/singup",singUp)
 // authrouter.post ("/singin",singIn)
 //authrouter.post ("/singout",singOut)
-shopRouter.get ("/create-edit-shop",isAuth,upload.single("image"),createEditShop)
+shopRouter.post ("/create-edit-shop",isAuth,upload.single("image"),createEditShop)
 shopRouter.get ("/get-my",isAuth,getmyshop)
 
 // authrouter.post ("/send-otp",sendOtp)

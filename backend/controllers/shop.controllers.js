@@ -13,7 +13,7 @@ export const createEditShop = async (req, res) => {
     }
 
    
-    let shop = await Shop.findOne({ owner: req.userId });
+    let shop = await Shop.findOne({ owner: req.user._id });
 
     if (!shop) {
       // Create new shop
@@ -29,7 +29,7 @@ export const createEditShop = async (req, res) => {
       
       shop = await Shop.findByIdAndUpdate(
         shop._id,
-        { name, city, state, address, image },
+        { name, city, state, address, image: image || shop.image, },
         { new: true }
       );
     }
