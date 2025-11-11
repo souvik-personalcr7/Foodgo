@@ -15,10 +15,10 @@ function CreateEditShop() {
     const Navigate = useNavigate()
     const { myShopData } = useSelector(state => state.owner)
     const { currentCity, currentState, currentAddress } = useSelector(state => state.user)
-    const [ name, setName ] = useState(myShopData?.name || "")
-    const [ address, setAddress ] = useState(myShopData?.address || currentAddress)
-    const [ city, setCity ] = useState(myShopData?.city || currentCity)
-    const [ state, setState ] = useState(myShopData?.city || currentState)
+    const [name, setName] = useState(myShopData?.name || "")
+    const [address, setAddress] = useState(myShopData?.address || currentAddress)
+    const [city, setCity] = useState(myShopData?.city || currentCity)
+    const [state, setState] = useState(myShopData?.state || currentState)
     const [frontendImage, setFrontendImage] = useState(myShopData?.image || null)
     const [backendImage, setBackendImage] = useState(null)
     const dispatch = useDispatch()
@@ -40,7 +40,7 @@ function CreateEditShop() {
             if (backendImage) {
                 formData.append("image", backendImage)
             }
-            const result = await axios.post(`${serverUrl}/api/shop/create-edit-shop`, formData,
+            const result = await axios.post(` ${serverUrl}/api/shop/create-edit-shop`, formData,
                 { withCredentials: true })
             dispatch(setMyShopData(result.data))
             console.log(result.data)
@@ -54,13 +54,13 @@ function CreateEditShop() {
 
             <div>
                 <IoMdArrowRoundBack size={45} className='absolute top-6 left-6 cursor-pointer 
-                text-amber-700 hover:text-amber-900 transition-colors' onClick={() => Navigate("/")} />
+                text-amber-50 hover:text-amber-900 transition-colors' onClick={() => Navigate("/")} />
             </div >
             <div className='max-w-lag  bg-amber-600 rounded-2xl shadow-xl p-8 border-orange-100'>
                 <div className='flex flex-col items-center mb-6'>
                     <FaUtensils className='text-amber-100 w-16 h-16 sm:h-20 mb-4' />
                 </div>
-                <div className='text-amber-50 font-extrabold '>
+                <div className='flex justify-center w-full text-amber-50 font-extrabold text-3xl'>
                     {myShopData ? "Edit Shop" : "Add Shop"}
 
                 </div>
@@ -73,7 +73,7 @@ function CreateEditShop() {
                     </div>
                     <div>
                         <label className='block text-sm font-medium text-white mb-2'>Shop Image</label>
-                        <input type="file" placeholder='Enter Shop Name'
+                        <input type="file" accept='image/*'
                             className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 
                             focus:ring-amber-600' onChange={handelImage} />
                         {frontendImage && <div className='mt-5'>
@@ -105,7 +105,7 @@ function CreateEditShop() {
                             focus:ring-amber-600' onChange={(e) => setAddress(e.target.value)} value={address} />
                     </div>
                     <button className='w-full bg-amber-50 text-black px-6 py-3 rounded-lg font-semibold
-                          shadow-md hover:bg-amber-600 hover:text-amber-50 transition-all duration-200 cursor-pointer'>
+                          shadow-md hover:bg-amber-900 hover:text-amber-50 transition-all duration-200 cursor-pointer'>
                         Save</button>
 
                 </form>
