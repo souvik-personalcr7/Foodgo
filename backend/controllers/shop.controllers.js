@@ -13,7 +13,7 @@ export const createEditShop = async (req, res) => {
     }
 
    
-    let shop = await Shop.findOne({ owner: req.user._id });
+    let shop = await Shop.findOne({ owner: req.userId });
 
     if (!shop) {
       // Create new shop
