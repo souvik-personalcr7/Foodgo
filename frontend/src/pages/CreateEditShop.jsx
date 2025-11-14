@@ -40,7 +40,7 @@ function CreateEditShop() {
             if (backendImage) {
                 formData.append("image", backendImage)
             }
-            const result = await axios.post(` ${serverUrl}/api/shop/create-edit-shop`, formData,
+            const result = await axios.post(`${serverUrl}/api/shop/create-edit-shop`, formData,
                 { withCredentials: true })
             dispatch(setMyShopData(result.data))
             console.log(result.data)
@@ -75,7 +75,7 @@ function CreateEditShop() {
                         <label className='block text-sm font-medium text-white mb-2'>Shop Image</label>
                         <input type="file" accept='image/*'
                             className='w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 
-                            focus:ring-amber-600' onChange={handelImage} />
+                            focus:ring-amber-600'    onChange={handelImage} />
                         {frontendImage && <div className='mt-5'>
                             <img src={frontendImage} alt="" className='w-full h-58 object-cover rounded-lg border' />
                         </div>}

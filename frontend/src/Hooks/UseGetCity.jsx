@@ -18,7 +18,7 @@ function useGetCity() {
             //console.log(result.data.results[0].city)
             dispatch(setCurrentCity(result ?.data.results[0].city))
             dispatch(setCurrentState(result ?.data.results[0].state))
-            dispatch(setCurrentAddress(result ?.data.results[0].state))
+            dispatch(setCurrentAddress(result ?.data.results[0].address_line2 || result ?. result ?.data.results[0].address_line1))
             console.log(Object)
         })
     }, [userData])

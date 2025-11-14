@@ -34,7 +34,7 @@ const SingIn = () => {
                     password,
 
                 },
-                { withCredential: true }
+                { withCredentials: true }
             )
             dispatch(setUserData(result.data))
             console.log(result.data)
