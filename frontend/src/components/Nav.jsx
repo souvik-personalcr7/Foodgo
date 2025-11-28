@@ -143,7 +143,7 @@ function Nav() {
 
 
                 <div
-                    className='bg-amber-700 text-amber-50 w-[40px] h-[40px] rounded-full flex items-center justify-center
+                    className='bg-amber-700 text-amber-50 w-[40px] h-[40px] rounded-2xl flex items-center justify-center
           shadow-xl font-bold mr-[10px] text-[18px] cursor-pointer'
                     onClick={() => setShowInfo(prev => !prev)}
                 >

@@ -42,7 +42,8 @@ function CreateEditShop() {
             }
             const result = await axios.post(`${serverUrl}/api/shop/create-edit-shop`, formData,
                 { withCredentials: true })
-            dispatch(setMyShopData(result.data))
+            dispatch(setMyShopData(result.data.shop))
+            Navigate("/owner/dashboard")
             console.log(result.data)
         } catch (error) {
             console.log(error);
@@ -54,7 +55,7 @@ function CreateEditShop() {
 
             <div>
                 <IoMdArrowRoundBack size={45} className='absolute top-6 left-6 cursor-pointer 
-                text-amber-50 hover:text-amber-900 transition-colors' onClick={() => Navigate("/")} />
+                text-amber-900 transition-colors' onClick={() => Navigate("/")} />
             </div >
             <div className='max-w-lag  bg-amber-600 rounded-2xl shadow-xl p-8 border-orange-100'>
                 <div className='flex flex-col items-center mb-6'>
