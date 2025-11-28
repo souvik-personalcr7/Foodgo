@@ -7,12 +7,12 @@ export const createEditShop = async (req, res) => {
     const { name, city, state, address } = req.body;
     let image;
 
-    
+
     if (req.file) {
       image = await uploadCloudinary(req.file.path);
     }
 
-   
+
     let shop = await Shop.findOne({ owner: req.userId });
 
     if (!shop) {
@@ -26,16 +26,22 @@ export const createEditShop = async (req, res) => {
         owner: req.userId,
       });
     } else {
-      
+
       shop = await Shop.findByIdAndUpdate(
         shop._id,
-        { name, city, state, address, image: image || shop.image, },
+        {
+          name, city, state, address,
+          image: image || shop.image,
+        },
         { new: true }
       );
     }
 
     await shop.populate("owner");
-    return res.status(201).json(shop);
+    return res.status(201).json({
+      success:true,
+      shop,
+    });
   } catch (error) {
     return res.status(500).json({ message: `Create shop error: ${error}` });
   }
